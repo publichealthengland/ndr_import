@@ -1,6 +1,6 @@
 ---
 layout: page
-title: XML File Netdata
+title: XML File Metdata
 permalink: /xml-file-metadata/
 ---
 

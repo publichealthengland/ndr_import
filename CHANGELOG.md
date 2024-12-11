@@ -3,6 +3,7 @@
 * Column zipping functionality *
 * Capturing Column name *
 * Regular expression column names *
+* VCF file/table metadata storage *
 
 ## 11.2.1 / 2024-11-18
 ### Fixed

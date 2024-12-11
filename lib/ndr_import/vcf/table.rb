@@ -6,7 +6,7 @@ module NdrImport
     # All other Table logic is inherited from `NdrImport::Table`
     class Table < ::NdrImport::Table
       def self.all_valid_options
-        super - %w[delimiter header_lines footer_lines]
+        super - %w[delimiter header_lines footer_lines] + %w[vcf_file_metadata]
       end
 
       def header_lines

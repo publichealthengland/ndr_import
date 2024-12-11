@@ -16,3 +16,4 @@ add_to_nav: true
 9. [Zipped Field Mapping](zipped-field-mapping.md)
 10. [Regular Expression Column Names](regexp-column-names.md)
 11. [Capturing Column Names in Mapped Data](capturing-column-names.md)
+12. [VCF file metadata](vcf-file-metadata.md)

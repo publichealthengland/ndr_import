@@ -51,20 +51,23 @@ module NdrImport
       NdrImport::File::Registry.files(source_file, 'unzip_path' => unzip_path).each do |filename|
         # now at the individual file level, can we find the table mapping?
         table_mapping = get_table_mapping(filename, nil)
-
-        options = { 'unzip_path'                 => unzip_path,
-                    'col_sep'                    => table_mapping.try(:delimiter),
-                    'file_password'              => table_mapping.try(:file_password),
-                    'liberal_parsing'            => table_mapping.try(:liberal_parsing),
-                    'xml_record_xpath'           => table_mapping.try(:xml_record_xpath),
-                    'slurp'                      => table_mapping.try(:slurp),
-                    'yield_xml_record'           => table_mapping.try(:yield_xml_record),
-                    'pattern_match_record_xpath' => table_mapping.try(:pattern_match_record_xpath),
-                    'xml_file_metadata'          => table_mapping.try(:xml_file_metadata) }
+        options       = table_options_from(table_mapping).merge { 'unzip_path' => unzip_path }
 
         tables = NdrImport::File::Registry.tables(filename, table_mapping.try(:format), options)
         yield_tables_and_their_content(filename, tables, &block)
       end
+    end
+
+    def table_options_from(table_mapping)
+      { 'col_sep'                    => table_mapping.try(:delimiter),
+        'file_password'              => table_mapping.try(:file_password),
+        'liberal_parsing'            => table_mapping.try(:liberal_parsing),
+        'xml_record_xpath'           => table_mapping.try(:xml_record_xpath),
+        'slurp'                      => table_mapping.try(:slurp),
+        'yield_xml_record'           => table_mapping.try(:yield_xml_record),
+        'pattern_match_record_xpath' => table_mapping.try(:pattern_match_record_xpath),
+        'xml_file_metadata'          => table_mapping.try(:xml_file_metadata),
+        'vcf_file_metadata'          => table_mapping.try(:vcf_file_metadata) }
     end
 
     # This method does the table row yielding for the extract method, setting the notifier
